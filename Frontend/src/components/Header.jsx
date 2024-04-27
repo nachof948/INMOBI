@@ -1,15 +1,12 @@
 import { FaSearch } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { LOGOUT } from '../constants'
 import LOGO from '../assets/Logo.jpg'
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
-  const logout = () =>{
-    dispatch({type: LOGOUT})
-  }
+
+
   return(
     <header className="bg-slate-800 shadow-sm">
       <div className="flex justify-between items-center max-w-[100rem] mx-auto p-3">
@@ -28,10 +25,13 @@ const Header = () => {
         <nav className='flex items-center gap-12 text-blue-400 font-semibold text-md md:text-lg'>
           <Link className='hidden sm:inline transition-all duration-200 hover:text-slate-50' to="/">Inicio</Link>
           <Link className='hidden sm:inline transition-all duration-200 hover:text-slate-50' to="/sobre-nosotros">Sobre Nosotros</Link>
-          {user?.result ? <img src={user.result.imageProfile} onClick={logout} className='w-12 rounded-full cursor-pointer'/> : 
-          <Link className='transition-all duration-200 hover:text-slate-50' to="/sign-in">
-            Iniciar Sesión
-          </Link>}
+          
+          <Link className='transition-all duration-200 hover:text-slate-50' to="/profile">
+          {user?.result ? (<img src={user.result.imageProfile} className='w-12 rounded-full cursor-pointer'/>) : 
+            (<li className='list-none'>
+                Iniciar Sesión
+            </li>)}
+          </Link>
         </nav>
       </div>
     </header>
