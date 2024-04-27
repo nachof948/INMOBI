@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = axios.create({baseURL:'http://localhost:4500/'})
+const API = axios.create({baseURL:'https://inmobi-server.vercel.app/'})
 
 //AUTH
 export const signUp = (formData) => API.post('/auth/signup', formData);
