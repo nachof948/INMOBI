@@ -2,11 +2,14 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { LOGOUT } from '../constants'
 import { useNavigate } from 'react-router-dom'
+import { UploadImage } from '../components/UploadImage'
+
 
 const Profile = () => {
   const {user} = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const navegar = useNavigate()
+
 
   const logout = () =>{
     dispatch({type: LOGOUT})
@@ -17,19 +20,19 @@ const Profile = () => {
     <section className='p-3 max-w-lg mx-auto'>
       <h1 className="text-3xl font-semibold text-center my-7">Perfil</h1>
       <form className='flex flex-col gap-4'>
-        <img src={user?.result?.imageProfile} alt={user?.result?.username} className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2 '  />
+        <UploadImage />
         <input type="text" placeholder='Nombre de usuario'
-          className='border p-3 rounded-lg'
+          className="border p-3 bg-slate-800 placeholder:text-white rounded-lg text-lg w-[30.5rem] text-white"
           name='username'
           value={user?.result?.username}
         />
         <input type="text" placeholder='Email'
-          className='border p-3 rounded-lg'
+          className="border p-3 bg-slate-800 placeholder:text-white rounded-lg text-lg w-[30.5rem] text-white"
           name='email'
           value={user?.result?.email}
         />
-        <input type="password" placeholder='Email'
-          className='border p-3 rounded-lg'
+        <input type="password" placeholder='Contraseña'
+          className="border p-3 bg-slate-800 placeholder:text-white rounded-lg text-lg w-[30.5rem] text-white"
           name='password'
           value={user?.result?.password}
         />

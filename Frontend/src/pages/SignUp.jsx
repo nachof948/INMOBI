@@ -31,9 +31,9 @@ const SignUp = () => {
         Registrarse
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-10 ">
-        <input type="text" placeholder="Nombre de Usuario" className="border p-3 bg-slate-800 placeholder:text-white rounded-lg w-[25rem]" name="username" onChange={handleChange} />
-        <input type="text" placeholder="Email" className="border p-3 rounded-lg bg-slate-800 placeholder:text-white w-[25rem]" name="email" onChange={handleChange} />
-        <input type="text" placeholder="Contraseña" className="border p-3 rounded-lg bg-slate-800 placeholder:text-white w-[25rem]" name="password" onChange={handleChange} />
+        <input type="text" placeholder="Nombre de Usuario" className="border p-3 bg-slate-800 text-white placeholder:text-white rounded-lg w-[25rem]" name="username" onChange={handleChange} />
+        <input type="text" placeholder="Email" className="border p-3 rounded-lg bg-slate-800 text-white placeholder:text-white w-[25rem]" name="email" onChange={handleChange} />
+        <input type="text" placeholder="Contraseña" className="border p-3 rounded-lg bg-slate-800 text-white placeholder:text-white w-[25rem]" name="password" onChange={handleChange} />
         {isLoading ? 
         <Loading />
         : <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90">Registrarse</button>}
