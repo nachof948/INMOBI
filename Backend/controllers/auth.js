@@ -22,9 +22,7 @@ export const signup = async(req, res,next) =>{
             password: hashPassword
         })
 
-
         const token = jwt.sign({ email: newUser.email, id: newUser._id }, process.env.KEY_TOKEN, { expiresIn:'1h'})
-
 
         const { password: pass, ...rest } = newUser._doc
         res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
@@ -63,7 +61,7 @@ export const signin = async(req, res, next) =>{
 export const logout = async (req, res, next) =>{
     try{
         res.clearCookie('access_token')
-        res.status(200).json('Usuario deslogueado')
+        res.status(200).json({ message: 'Usuario deslogueado'})
     } catch(error) {
         next(error)
     }
@@ -77,7 +75,7 @@ export const google = async (req, res, next) => {
         if(user){
             const token = jwt.sign({ id: user._id}, process.env.KEY_TOKEN)
             const { password: pass, ...rest } = user._doc;
-            res.status(200).json({ result: rest, token})
+            res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
         }else{
             const generatePassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8)
             const hashPassword = await bcrypt.hash(generatePassword, 10);
@@ -90,7 +88,7 @@ export const google = async (req, res, next) => {
             await newUser.save()
             const token = jwt.sign({ id: newUser._id}, process.env.KEY_TOKEN)
             const { password: pass, ...rest } = newUser._doc;
-            res.status(200).json({ result: rest, token})
+            res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
         }
     }catch(error){
         next(error)
