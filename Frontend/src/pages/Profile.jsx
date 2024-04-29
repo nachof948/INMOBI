@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/actions/auth'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { UploadImage } from '../components/UploadImage'
 import { useState } from 'react'
 import { userDelete, userUpdate } from '../redux/actions/user'
@@ -66,6 +66,7 @@ const Profile = () => {
           onChange={handleChange}
         />
         <button className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95' onClick={handleUpdateUser}>Actualizar</button>
+        <Link to={'/crear-publicacion'} className='bg-green-700 text-white rounded-lg p-3 uppercase hover:opacity-95 text-center'>Publicar una propiedad</Link>
       </form>
       <div className='flex justify-between mt-5'>
         <span className='text-red-700 cursor-pointer' onClick={handleDeleteUser}>Eliminar mi cuenta</span>
