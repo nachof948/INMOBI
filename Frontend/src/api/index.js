@@ -11,7 +11,9 @@ export const signUp = (formData) => API.post('/auth/signup', formData, {
 export const signIn = (formData) => API.post('/auth/signin', formData, {
     withCredentials: 'include'
 });
-export const logOut = () => API.post('/auth/logout')
+export const logOut = () => API.get('/auth/logout',{
+    withCredentials: 'include'
+})
 
 
 export const signInGoogle = (formData) => API.post('/auth/google', formData, {

@@ -28,7 +28,7 @@ const Profile = () => {
 
   const logOut = () =>{
     dispatch(logout())
-    navegar('/')
+    navegar('/sign-in')
   }
 
   const handleUpdateUser = (e) =>{
