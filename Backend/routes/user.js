@@ -1,10 +1,9 @@
 import express from 'express'
-import { signup, signin, google } from '../controllers/user.js'
+import { updateUser } from '../controllers/user.js'
+import { verifyUser } from '../middleware/verifyUser.js'
 
 const router = express.Router()
 
-router.post('/signup', signup)
-router.post('/signin', signin)
-router.post('/google', google)
+router.post('/update/:id', verifyUser ,updateUser)
 
 export default router

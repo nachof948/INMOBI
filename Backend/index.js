@@ -1,6 +1,7 @@
 import express from 'express'
 import connectDB from './db/connect.js';
-import authRouter from './routes/user.js'
+import authRouter from './routes/auth.js'
+import userRouter from './routes/user.js'
 import 'dotenv/config'
 import bodyParser from 'body-parser';
 import cors from 'cors'
@@ -8,16 +9,22 @@ import cookieParser from 'cookie-parser'
 
 const app = express();
 
+app.use(cors({
+    origin:'http://localhost:5173',
+    credentials: true
+}))
+app.use(cookieParser())
+app.use(express.json())
 const PUERTO = process.env.PUERTO
-
+/* 
 app.use(bodyParser.json({ limit: '30mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true}));
-app.use(cors())
-app.use(cookieParser())
+ */
 
 
 //RUTAS
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
 
 //MIDDLEWARE
 app.use((err, req, res, next) =>{
