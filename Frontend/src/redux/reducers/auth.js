@@ -1,4 +1,4 @@
-import { LOGOUT, AUTH, START_LOADING, END_LOADING, ERROR,AUTH_GOOGLE, UPDATE_USER } from "../../constants";
+import { LOGOUT, AUTH, START_LOADING, END_LOADING, ERROR,AUTH_GOOGLE, UPDATE_USER, DELETE_USER } from "../../constants";
 
 const initialState={
   user: /* JSON.parse(localStorage.getItem('profile')) ||  */{}, 
@@ -20,6 +20,8 @@ const authReducer = (state = initialState, action) => {
           return { ...state, user: action?.payload};
       case UPDATE_USER:
         return {...state, user: action?.payload};
+      case DELETE_USER:
+        return {...state, user: {}}
       case AUTH_GOOGLE:
         return{...state, userGoogle: action?.payload}
       case LOGOUT:

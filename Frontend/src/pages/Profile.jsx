@@ -4,7 +4,7 @@ import { logout } from '../redux/actions/auth'
 import { useNavigate } from 'react-router-dom'
 import { UploadImage } from '../components/UploadImage'
 import { useState } from 'react'
-import { userUpdate } from '../redux/actions/user'
+import { userDelete, userUpdate } from '../redux/actions/user'
 
 
 const Profile = () => {
@@ -36,6 +36,12 @@ const Profile = () => {
     dispatch(userUpdate(formData, user?.result?._id))
   }
 
+  const handleDeleteUser = (e) =>{
+    e.preventDefault()
+    dispatch(userDelete(user?.result?._id))
+    navegar('/')
+  }
+
   return(
     <section className='p-3 max-w-lg mx-auto'>
       <h1 className="text-3xl font-semibold text-center my-7">Perfil</h1>
@@ -62,7 +68,7 @@ const Profile = () => {
         <button className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95' onClick={handleUpdateUser}>Actualizar</button>
       </form>
       <div className='flex justify-between mt-5'>
-        <span className='text-red-700 cursor-pointer'>Eliminar mi cuenta</span>
+        <span className='text-red-700 cursor-pointer' onClick={handleDeleteUser}>Eliminar mi cuenta</span>
         <span className='text-red-700 cursor-pointer' onClick={logOut}>Cerrar Sesión</span>
       </div>
     </section>

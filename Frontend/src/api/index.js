@@ -22,3 +22,6 @@ export const signInGoogle = (formData) => API.post('/auth/google', formData, {
 export const updatedUser = (formData, id) => API.post(`/user/update/${id}`, formData,{
     withCredentials: 'include'
 });
+export const deleteUser = (id) => API.delete(`/user/delete/${id}`, {
+    withCredentials: 'include'
+});
