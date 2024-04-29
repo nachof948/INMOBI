@@ -1,4 +1,4 @@
-import { AUTH, END_LOADING, ERROR, START_LOADING } from "../../constants";
+import { AUTH, END_LOADING, ERROR, LOGOUT, START_LOADING } from "../../constants";
 import * as api from '../../api/index'
 
 export const signup = (formData) => async (dispatch)=>{
@@ -26,6 +26,21 @@ export const signin = (formData) => async (dispatch)=>{
             dispatch({ type: ERROR, payload: { message: data.message } });
         } else {
             dispatch({ type: AUTH, payload: data });
+        }
+        dispatch({ type: END_LOADING });
+    } catch(error) {
+        dispatch({ type: ERROR, payload: { message: 'Error de red: No se pudo conectar al servidor' } });
+    }
+}
+export const logout = () => async (dispatch)=>{
+    try {
+        dispatch({ type: START_LOADING });
+        const { data } = await api.logOut();
+
+        if (data.success === false) {
+            dispatch({ type: ERROR, payload: { message: data.message } });
+        } else {
+            dispatch({ type: LOGOUT});
         }
         dispatch({ type: END_LOADING });
     } catch(error) {
