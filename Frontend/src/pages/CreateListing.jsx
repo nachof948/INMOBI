@@ -1,6 +1,4 @@
-import { getDownloadURL, getStorage, uploadBytesResumable, ref } from "firebase/storage"
-import { useState, useEffect } from "react"
-import { app } from "../firebase"
+import { useState } from "react"
 import { UploadImageList } from "../components/UploadImageList"
 
 
