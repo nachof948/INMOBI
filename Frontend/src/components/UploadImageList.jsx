@@ -7,7 +7,6 @@ const UploadImageList = ({ onImageChange }) => {
   const [imageUrls, setImageUrls] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [imageUploadError, setImageUploadError] = useState(false);
-  console.log(imageUrls)
 
   const handleImageSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ const UploadImageList = ({ onImageChange }) => {
         setImageUploadError(false);
         setCargando(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setImageUploadError("Fallo la carga de las imagenes");
         });
     } else {
@@ -42,7 +41,7 @@ const UploadImageList = ({ onImageChange }) => {
       uploadTask.on(
         "state_change",
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
           reject(error);
