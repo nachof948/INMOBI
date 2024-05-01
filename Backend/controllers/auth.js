@@ -22,7 +22,7 @@ export const signup = async(req, res,next) =>{
             password: hashPassword
         })
 
-        const token = jwt.sign({ email: newUser.email, id: newUser._id }, process.env.KEY_TOKEN, { expiresIn:'1h'})
+        const token = jwt.sign({ email: newUser.email, id: newUser._id }, process.env.KEY_TOKEN)
 
         const { password: pass, ...rest } = newUser._doc
         res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
