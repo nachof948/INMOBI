@@ -1,6 +1,6 @@
 import { errorHandler } from "../middleware/error.js";
 import Usuario from "../models/user.js"
-import bcrypt from 'bcrypt'
+import Listing from "../models/listing.js";
 
 export const updateUser = async (req, res, next) =>{
     const { email, username, password, imageProfile } = req.body;
@@ -35,4 +35,20 @@ export const deleteUser = async (req, res, next) =>{
     } catch (error) {
         next(error)
     }
+}
+
+export const getUserListing = async (req, res, next) =>{
+    const {id} = req.params
+    if(req.user.id === id){
+        try {
+            const listings = await Listing.find({userRef: id});
+            res.status(200).json(listings)
+        } catch (error) {
+            next(error)
+        }
+        
+    }else{
+        return next(errorHandler(401,'Solo puedes ver tus propias publicaciones'))
+    }
+
 }
