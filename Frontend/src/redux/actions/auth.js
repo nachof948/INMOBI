@@ -3,7 +3,6 @@ import * as api from '../../api/index'
 
 export const signup = (formData) => async (dispatch)=>{
     try {
-        dispatch({ type: START_LOADING });
         const { data } = await api.signUp(formData);
 
         if (data.success === false) {
@@ -11,7 +10,6 @@ export const signup = (formData) => async (dispatch)=>{
         } else {
             dispatch({ type: AUTH, payload: data });
         }
-        dispatch({ type: END_LOADING });
     } catch(error) {
         console.log(error);
     }
@@ -19,7 +17,6 @@ export const signup = (formData) => async (dispatch)=>{
 
 export const signin = (formData) => async (dispatch)=>{
     try {
-        dispatch({ type: START_LOADING });
         const { data } = await api.signIn(formData);
 
         if (data.success === false) {
@@ -27,14 +24,12 @@ export const signin = (formData) => async (dispatch)=>{
         } else {
             dispatch({ type: AUTH, payload: data });
         }
-        dispatch({ type: END_LOADING });
     } catch(error) {
         dispatch({ type: ERROR, payload: { message: 'Error de red: No se pudo conectar al servidor' } });
     }
 }
 export const logout = () => async (dispatch)=>{
     try {
-        dispatch({ type: START_LOADING });
         const { data } = await api.logOut();
 
         if (data.success === false) {
@@ -42,7 +37,6 @@ export const logout = () => async (dispatch)=>{
         } else {
             dispatch({ type: LOGOUT});
         }
-        dispatch({ type: END_LOADING });
     } catch(error) {
         dispatch({ type: ERROR, payload: { message: 'Error de red: No se pudo conectar al servidor' } });
     }

@@ -5,10 +5,13 @@ import { useNavigate, Link } from 'react-router-dom'
 import { UploadImage } from '../components/UploadImage'
 import { useState } from 'react'
 import { userDelete, userUpdate } from '../redux/actions/user'
+import { ListingsUser } from '../components/ListingsUser'
+
 
 
 const Profile = () => {
   const {user} = useSelector((state) => state.auth)
+  const [showListing, setShowListing] = useState(false)
   const dispatch = useDispatch()
   const navegar = useNavigate()
   const [formData, setFormData] = useState({
@@ -42,6 +45,9 @@ const Profile = () => {
     navegar('/')
   }
 
+  const handleShowListing = () =>{
+    setShowListing(true)
+  }
   return(
     <section className='p-3 max-w-lg mx-auto'>
       <h1 className="text-3xl font-semibold text-center my-7">Perfil</h1>
@@ -72,6 +78,8 @@ const Profile = () => {
         <span className='text-red-700 cursor-pointer' onClick={handleDeleteUser}>Eliminar mi cuenta</span>
         <span className='text-red-700 cursor-pointer' onClick={logOut}>Cerrar Sesión</span>
       </div>
+      <button type='button' onClick={handleShowListing} className='text-green-700 text-center w-full'>Mostrar Publicaciones</button>
+      {showListing && <ListingsUser userId={user?.result?._id} />}
     </section>
   )
 }

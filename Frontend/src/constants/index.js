@@ -12,3 +12,5 @@ export const UPDATE_USER = 'UPDATE_USER'
 export const DELETE_USER = 'DELETE_USER'
 /* LISTING */
 export const CREATE_LISTING = 'CREATE_LISTING'
+export const GET_USER_LISTING = 'GET_USER_LISTING'
+export const CLEAR_LISTING = 'CLEAR_LISTING'

@@ -25,6 +25,10 @@ export const updatedUser = (formData, id) => API.post(`/user/update/${id}`, form
 export const deleteUser = (id) => API.delete(`/user/delete/${id}`, {
     withCredentials: 'include'
 });
+export const getListingUser = (id) => API.get(`/user/listings/${id}`, {
+    withCredentials: 'include'
+})
+
 
 //PUBICACION
 export const createListing = (formData, userRef) => API.post('/listing/create', {formData, userRef} , {

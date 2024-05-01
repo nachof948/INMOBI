@@ -9,7 +9,7 @@ import { OAuth } from '../components/OAuth'
 
 const SignIn = () => {
   const dispatch = useDispatch()
-  const { isLoading, error } = useSelector((state) => state.auth)
+  const { error } = useSelector((state) => state.auth)
 
   const [formData, setFormData] = useState({})
   const navegar = useNavigate()
@@ -35,9 +35,7 @@ const SignIn = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-10 ">
           <input type="text" placeholder="Email" className="border p-3 bg-slate-800 placeholder:text-white rounded-lg w-[25rem]" name="email" onChange={handleChange} />
           <input type="text" placeholder="Contraseña" className="border p-3 bg-slate-800 placeholder:text-white rounded-lg w-[25rem]" name="password" onChange={handleChange} />
-          {isLoading ? 
-          <Loading />
-          : <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90">Iniciar Sesion</button>}
+          <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90">Iniciar Sesion</button>
           <OAuth />
         </form>
         {error && <p>{error.message}</p>}

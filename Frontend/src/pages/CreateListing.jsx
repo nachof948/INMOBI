@@ -1,17 +1,15 @@
 import { useState } from "react"
 import { UploadImageList } from "../components/UploadImageList"
-import { useDispatch } from 'react-redux'
-import { listingCreate } from "../redux/actions/listing"
 import { useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
+import * as api from '../api/index'
 
 const CreateListing = () => {
   const {user} = useSelector((state) => state.auth)
-  const { listing } = useSelector((state) => state.listing)
 
   const [error, setError] = useState('')
   const navegar = useNavigate()
-  const dispatch = useDispatch()
+
   const checkboxStyle = 'w-5 h-5 cursor-pointer'
   const spanStyle = 'font-semibold text-lg'
   const [formData, setFormData] = useState({
@@ -77,8 +75,8 @@ const CreateListing = () => {
     if(formData.imageUrls < 1) return setError('Debes subir al menos una imagen')
     
     if(+formData.regularPrice < +formData.discountPrice) return (setError('El precio descontado debe ser menor al regular'))
-    dispatch(listingCreate({...formData, userRef: user?.result?._id}))
-    navegar(`/publicacion/${listing._id}`)
+    api.createListing({...formData, userRef: user?.result?._id})
+    navegar(`/publicacion/${user?.result?._id}`)
   }
 
   return(

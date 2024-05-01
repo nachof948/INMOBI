@@ -1,13 +1,15 @@
-import { CREATE_LISTING } from "../../constants";
+import { GET_USER_LISTING,CLEAR_LISTING } from "../../constants";
 
 const initialState = {
-    listing:{}
+    listing:[]
 }
 
 const listingReducer = (state = initialState, action) => {
   switch(action.type){
-    case CREATE_LISTING:
-      return{...state, listing: action?.payload}
+    case GET_USER_LISTING:
+      return{...state, listing: action.payload}
+    case CLEAR_LISTING:
+      return { ...state, listing: [] };
     default:
       return state
   }
