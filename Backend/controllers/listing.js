@@ -19,3 +19,27 @@ export const deleteListing = async (req, res, next) =>{
         next(error)
     }
 }
+
+export const getList = async (req, res, next) =>{
+    const { id } = req.params;
+    try {
+        const list = await Listing.findById(id);
+        res.status(200).json(list)
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+export const updateListing = async (req, res, next) =>{
+    const { id } = req.params
+    const update = req.body;
+    try {
+        const updateList = await Listing.findByIdAndUpdate(id,{
+            $set: update
+        }, {new: true})
+        res.status(200).json({result: updateList})
+    } catch (error) {
+        next(error)
+    }
+}
