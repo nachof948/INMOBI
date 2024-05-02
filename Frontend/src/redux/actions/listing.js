@@ -1,4 +1,4 @@
-import { CLEAR_LISTING, DELETE_LISTING, END_LOADING, GET_USER_LISTING, START_LOADING} from "../../constants";
+import { CLEAR_LISTING, DELETE_LISTING, END_LOADING, GET_LIST, GET_USER_LISTING, START_LOADING} from "../../constants";
 import * as api from '../../api/index'
 
 export const listingUserGet = (id) => async (dispatch) =>{
@@ -18,6 +18,16 @@ export const listingDelete = (id) => async (dispatch) =>{
         await api.deleteListing(id)
         dispatch({type: DELETE_LISTING, payload: id})
     }catch(error){
+        console.log(error)
+    }
+}
+
+export const listGet = (id) => async (dispatch) =>{
+    try {
+        const { data } = await api.getList(id)
+        console.log(data)
+        /* dispatch({type: GET_LIST, payload: data}) */
+    } catch (error) {
         console.log(error)
     }
 }

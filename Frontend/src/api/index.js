@@ -37,3 +37,6 @@ export const createListing = (formData, userRef) => API.post('/listing/create', 
 export const deleteListing = (id) => API.delete(`/listing/delete/${id}`, {
     withCredentials: 'include'
 })
+export const getList = (id) => API.get(`/listing/list/${id}`, {
+    withCredentials: 'include'
+})
