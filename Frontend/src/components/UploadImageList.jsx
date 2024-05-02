@@ -1,12 +1,16 @@
 import { getDownloadURL, getStorage, uploadBytesResumable, ref } from "firebase/storage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { app } from "../firebase";
 
-const UploadImageList = ({ onImageChange }) => {
+const UploadImageList = ({ onImageChange, imageUrl }) => {
   const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [imageUrls, setImageUrls] = useState(imageUrl || []);
   const [cargando, setCargando] = useState(false);
   const [imageUploadError, setImageUploadError] = useState(false);
+
+  useEffect(() => {
+    setImageUrls(imageUrl || []);
+  }, [imageUrl]);
 
   const handleImageSubmit = (e) => {
     e.preventDefault();

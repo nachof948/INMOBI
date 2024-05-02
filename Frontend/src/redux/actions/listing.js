@@ -25,8 +25,7 @@ export const listingDelete = (id) => async (dispatch) =>{
 export const listGet = (id) => async (dispatch) =>{
     try {
         const { data } = await api.getList(id)
-        console.log(data)
-        /* dispatch({type: GET_LIST, payload: data}) */
+        dispatch({type: GET_LIST, payload: data})
     } catch (error) {
         console.log(error)
     }

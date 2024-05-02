@@ -2,13 +2,13 @@ import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { listGet, listingDelete, listingUserGet } from "../redux/actions/listing"
+import { listingDelete, listingUserGet } from "../redux/actions/listing"
 import { Loading } from '../components/Loading'
 
 const ListingsUser = ({userId}) => {
 
   const dispatch = useDispatch()
-  const {listing} = useSelector((state) => state.listing)
+  const { listing } = useSelector((state) => state.listing)
   const { isLoading } = useSelector((state) => state.auth)
 
 
@@ -25,10 +25,6 @@ const ListingsUser = ({userId}) => {
       console.log(error)
     }
   } 
-  
-  const handle = (id) =>{
-    dispatch(listGet(id))
-  }
 
   return (
     <div className="mt-9 flex flex-col gap-3">
@@ -49,7 +45,9 @@ const ListingsUser = ({userId}) => {
               </Link>
               <div className="flex flex-col">
                 <button className="text-red-700 uppercase font-semibold" onClick={() => userDeleteListing(list._id)}>Eliminar</button>
-                <button className="text-green-700 uppercase font-semibold" onClick={() => handle(list._id)}>Editar</button>
+                <Link to={`/editar-publicacion/${list._id}`}>
+                  <button className="text-green-700 uppercase font-semibold">Editar</button>
+                </Link>
               </div>
             </div>
           ))}
