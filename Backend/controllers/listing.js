@@ -9,3 +9,13 @@ export const createListing = async (req, res, next) =>{
         next(error)
     }
 }
+
+export const deleteListing = async (req, res, next) =>{
+    const { id } = req.params
+    try {
+        await Listing.findByIdAndDelete(id)
+        res.status(200).json('Se elimino correctamente')
+    } catch (error) {
+        next(error)
+    }
+}
