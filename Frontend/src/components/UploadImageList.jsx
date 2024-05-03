@@ -66,12 +66,9 @@ const UploadImageList = ({ onImageChange, imageUrl }) => {
     });
   };
 // Para obtener el valor actualizado, usa una función de callback
-const handleRemoveImage = (index) => {
-  setImageUrls(prevImageUrls => {
-      const updatedImageUrls = prevImageUrls.filter((_, i) => i !== index);
-      return updatedImageUrls;
-  });
-  dispatch({type: DELETE_IMAGE, payload: imageUrls})
+const handleRemoveImage = (imageUrl) => {
+  const updatedImageUrls = imageUrls.filter((url) => url !== imageUrl);
+  dispatch({type: DELETE_IMAGE, payload: updatedImageUrls})
 };
 
   return (
@@ -101,7 +98,7 @@ const handleRemoveImage = (index) => {
             <img src={url} alt="Casa publicada" className="h-24 object-contain rounded-lg" />
             <button
               type="button"
-              onClick={() => handleRemoveImage(index)}
+              onClick={() => handleRemoveImage(url)}
               className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
             >
               Eliminar
