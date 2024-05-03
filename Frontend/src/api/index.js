@@ -13,7 +13,7 @@ export const signIn = (formData) => API.post('/auth/signin', formData, {
 });
 export const logOut = () => API.get('/auth/logout',{
     withCredentials: 'include'
-})
+});
 export const signInGoogle = (formData) => API.post('/auth/google', formData, {
     withCredentials: 'include'
 });
@@ -27,16 +27,19 @@ export const deleteUser = (id) => API.delete(`/user/delete/${id}`, {
 });
 export const getListingUser = (id) => API.get(`/user/listings/${id}`, {
     withCredentials: 'include'
-})
+});
 
 
 //PUBICACION
 export const createListing = (formData, userRef) => API.post('/listing/create', {formData, userRef} , {
     withCredentials: 'include'
-})
+});
 export const deleteListing = (id) => API.delete(`/listing/delete/${id}`, {
     withCredentials: 'include'
-})
+});
 export const getList = (id) => API.get(`/listing/list/${id}`, {
     withCredentials: 'include'
 })
+export const updateList = (id, formData) => API.put(`listing/update/${id}`,{formData},{
+    withCredentials: 'include'
+});

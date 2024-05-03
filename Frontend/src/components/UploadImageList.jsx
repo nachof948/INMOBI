@@ -1,8 +1,11 @@
 import { getDownloadURL, getStorage, uploadBytesResumable, ref } from "firebase/storage";
 import { useState, useEffect } from "react";
 import { app } from "../firebase";
+import { DELETE_IMAGE} from "../constants/index"
+import { useDispatch } from "react-redux";
 
 const UploadImageList = ({ onImageChange, imageUrl }) => {
+  const dispatch = useDispatch()
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState(imageUrl || []);
   const [cargando, setCargando] = useState(false);
@@ -62,10 +65,14 @@ const UploadImageList = ({ onImageChange, imageUrl }) => {
       );
     });
   };
-
-  const handleRemoveImage = (index) => {
-    setImageUrls(imageUrls.filter((_, i) => i !== index));
-  };
+// Para obtener el valor actualizado, usa una función de callback
+const handleRemoveImage = (index) => {
+  setImageUrls(prevImageUrls => {
+      const updatedImageUrls = prevImageUrls.filter((_, i) => i !== index);
+      return updatedImageUrls;
+  });
+  dispatch({type: DELETE_IMAGE, payload: imageUrls})
+};
 
   return (
     <>

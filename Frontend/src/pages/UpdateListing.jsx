@@ -3,7 +3,7 @@ import { UploadImageList } from "../components/UploadImageList"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, useParams } from 'react-router-dom'
 import * as api from '../api/index'
-import { listGet } from "../redux/actions/listing"
+import { listGet, listUpdate } from "../redux/actions/listing"
 
 const UpdateListing = () => {
   const { id } = useParams()
@@ -58,9 +58,10 @@ const UpdateListing = () => {
     }
   }, [list, user?.result?._id])
 
-  const handleImageChange = (imagesUrls) =>{
-    setFormData({...formData, imageUrls: imagesUrls})
-  }
+  const handleImageUrlsChange = (updatedImageUrls) => {
+    setFormData({...formData, imageUrls: updatedImageUrls});
+  };
+
   
   const handleChange = (e) =>{
     //Cambiar el valor de sale a rent o viceversa
@@ -99,15 +100,17 @@ const UpdateListing = () => {
     }
   }  
 
-  const handleSubmit= (e) =>{
-    e.preventDefault()
-    if(formData.imageUrls < 1) return setError('Debes subir al menos una imagen')
+  const handleSubmit= async (e) =>{
+    e.preventDefault();
+    if(formData.imageUrls < 1) {return setError('Debes subir al menos una imagen')}
     
-    if(+formData.regularPrice < +formData.discountPrice) return (setError('El precio descontado debe ser menor al regular'))
-    api.createListing({...formData, userRef: user?.result?._id})
-    navegar(`/publicacion/${user?.result?._id}`)
+    if(+formData.regularPrice < +formData.discountPrice) {return (setError('El precio descontado debe ser menor al regular'))}
+     try{
+      await dispatch(listUpdate(id, formData))
+    }catch(error){
+      console.log(error)
+    }
   }
-
   return(
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Publica una propiedad</h1>
@@ -262,7 +265,7 @@ const UpdateListing = () => {
           <p className="font-semibold">Imagenes:
           <span className="font-normal text-gray-600 ml-2">La primera imagen será la portada (max 6).</span>
           </p>
-          <UploadImageList onImageChange={handleImageChange} imageUrl={formData.imageUrls} />
+          <UploadImageList onImageChange={handleImageUrlsChange} imageUrl={formData.imageUrls} onImageRemove={handleImageUrlsChange}/>
           <button className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"> Publicar la propiedad</button>
           {error && <p className="text-red-700">{error}</p>}
         </div>
