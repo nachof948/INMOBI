@@ -33,12 +33,10 @@ export const getList = async (req, res, next) =>{
 
 export const updateListing = async (req, res, next) =>{
     const { id } = req.params
-    const update = req.body;
+    const {formData} = req.body;
     try {
-        const updateList = await Listing.findByIdAndUpdate(id,{
-            $set: update
-        }, {new: true})
-        res.status(200).json({result: updateList})
+        const updateList = await Listing.findByIdAndUpdate(id, formData, {new: true})
+        res.status(200).json(updateList)
     } catch (error) {
         next(error)
     }
