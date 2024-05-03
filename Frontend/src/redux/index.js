@@ -8,7 +8,7 @@ import { reducers } from './reducers';
 const persistConfig = {
   key: 'root', // la clave para el almacenamiento en localStorage
   storage, // el tipo de almacenamiento (puede ser localStorage o AsyncStorage para React Native)
-  blacklist:['listing']
+/*   blacklist:['listing'] */
   // Puedes configurar opciones adicionales aquí, como el whitelist o el blacklist de reducers
 };
 

@@ -107,13 +107,14 @@ const UpdateListing = () => {
     if(+formData.regularPrice < +formData.discountPrice) {return (setError('El precio descontado debe ser menor al regular'))}
      try{
       await dispatch(listUpdate(id, formData))
+      navegar(`/publicacion/${id}`)
     }catch(error){
       console.log(error)
     }
   }
   return(
     <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">Publica una propiedad</h1>
+      <h1 className="text-3xl font-semibold text-center my-7">Editar una propiedad</h1>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
           <input 
@@ -266,7 +267,7 @@ const UpdateListing = () => {
           <span className="font-normal text-gray-600 ml-2">La primera imagen será la portada (max 6).</span>
           </p>
           <UploadImageList onImageChange={handleImageUrlsChange} imageUrl={formData.imageUrls} onImageRemove={handleImageUrlsChange}/>
-          <button className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"> Publicar la propiedad</button>
+          <button className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"> Editar la propiedad</button>
           {error && <p className="text-red-700">{error}</p>}
         </div>
       </form>
