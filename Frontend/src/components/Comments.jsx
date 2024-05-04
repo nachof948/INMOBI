@@ -7,7 +7,7 @@ const Comments = () => {
   const { user } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const { id } = useParams()
-  const [formData, setFormData] = useState('')
+  const [comment, setComment] = useState('')
   const {list} = useSelector((state) => state.listing)
   
   useEffect(() => {
@@ -16,14 +16,16 @@ const Comments = () => {
    console.log(list.comments)
 
   const handleChange = (e) =>{
-    setFormData(e.target.value)
+    setComment(e.target.value)
   }
   const handleSubmit = (e) =>{
     e.preventDefault();
-    dispatch(listOpinion(id, formData, user?.result?._id))
+    const finalComment = `${user.result.imageProfile}${user.result.username}: ${comment}`
+    dispatch(listOpinion(finalComment, id))
   }
-  const deleteComment = (id, formData, userId) =>{
-    dispatch(listDeleteOpinion(id, formData, userId ))
+  const deleteComment = (comment) =>{
+    console.log(comment, id)
+    dispatch(listDeleteOpinion(comment, id))
   }
   return(
     <>
@@ -45,15 +47,14 @@ const Comments = () => {
     <div>
       {list.comments.map((opinion, index) =>(
         <div className=""key={index}>
-                    <textarea 
-          
+          <textarea 
           name="comments" 
           className='w-full relative resize-none rounded-md outline-none p-3 bg-slate-800 text-white placeholder:text-white' 
-          value={opinion.text}
+          value={opinion.comment}
           readOnly={true}
           disabled={true}
         />
-        <button onClick={() => deleteComment(id, opinion.text, user?.result?._id)}>X</button>
+        <button onClick={() => deleteComment(opinion.comment)}>X</button>
         </div>
       ))}
     </div>
