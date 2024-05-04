@@ -11,11 +11,10 @@ import {
   FaBed,
   FaChair,
   FaMapMarkedAlt,
-  FaMapMarkerAlt,
   FaParking,
-  FaShare,
 } from 'react-icons/fa';
 import { CopiedUrl } from "../components/CopiedUrl";
+import { Comments } from "../components/Comments";
 
 
 const Listing = () => {
@@ -24,6 +23,7 @@ const Listing = () => {
 
   const { id } = useParams()
   const { list } = useSelector((state) => state.listing)
+  console.log(list)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const Listing = () => {
 
   return(
     <main>
+      {list === null && <p>Cargando...</p>}
         <Swiper navigation modules={[EffectFade]} effect="fade">
           {list.imageUrls.map((url) => (
             <SwiperSlide key={url}>
@@ -84,6 +85,8 @@ const Listing = () => {
               {list.furnished ? `Amueblada` : `Sin Amueblar`} 
             </li>
           </ul>
+          <button type="button" className="uppercase mt-3 bg-slate-600 w-full p-3 text-white rounded-md hover:opacity-85">Agregar un comentario</button>
+          <Comments />
         </div>
     </main>
   )

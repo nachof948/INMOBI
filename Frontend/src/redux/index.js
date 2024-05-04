@@ -20,3 +20,10 @@ const store = createStore(persistedReducer, compose(applyMiddleware(thunk)));
 const persistor = persistStore(store); // Crea el persistor
 
 export { store, persistor };
+
+// Llama al método purge() del persistor
+/* persistor.purge().then(() => {
+  console.log('Estado persistente restablecido');
+}).catch((error) => {
+  console.error('Error al restablecer el estado persistente:', error);
+}); */

@@ -43,3 +43,9 @@ export const getList = (id) => API.get(`/listing/list/${id}`, {
 export const updateList = (id, formData) => API.put(`listing/update/${id}`,{formData},{
     withCredentials: 'include'
 });
+export const opinionList = (id, formData, userId) => API.post(`listing/comment/${id}`,{formData, userId},{
+    withCredentials: 'include'
+});
+export const deleteOpinionList = (id, formData, userId) => API.delete(`listing/comment/delete/${id}`,{formData, userId},{
+    withCredentials: 'include'
+});

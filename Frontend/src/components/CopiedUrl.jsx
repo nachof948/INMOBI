@@ -13,13 +13,13 @@ const CopiedUrl = () => {
   }
 
   return(
-    <div className='fixed top-[150px] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
+    <div className='absolute top-[150px] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
     <FaShare
       className="text-slate-500"
       onClick={handleCopied}
     />
     {copied && (
-      <p className='fixed top-[200px] right-[5%] z-10 rounded-md bg-green-300 p-2'>
+      <p className='absolute top-[65px] right-[30px] w-fit text-nowrap z-10 rounded-md bg-green-300 p-2 text-xl'>
         Link copiado!
       </p>
     )}

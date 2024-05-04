@@ -1,5 +1,4 @@
-import { list } from "firebase/storage";
-import { GET_USER_LISTING,CLEAR_LISTING, DELETE_LISTING, GET_LIST, UPDATE_LIST, DELETE_IMAGE } from "../../constants";
+import { GET_USER_LISTING,CLEAR_LISTING, DELETE_LISTING, GET_LIST, UPDATE_LIST, DELETE_IMAGE, COMMENT_LIST } from "../../constants";
 
 const initialState = {
     listing:[],
@@ -18,6 +17,8 @@ const listingReducer = (state = initialState, action) => {
       return{...state, list: action.payload}
     case DELETE_IMAGE:
       return{...state, list: {...state.list, imageUrls: action.payload}}
+    case COMMENT_LIST:
+      return{...state, list: {...state.list, comments: action.payload}}
     case CLEAR_LISTING:
       return { ...state, listing: [] };
     default:

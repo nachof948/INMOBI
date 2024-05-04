@@ -70,13 +70,16 @@ const CreateListing = () => {
     }
   }  
 
-  const handleSubmit= (e) =>{
+  const handleSubmit= async  (e) =>{
     e.preventDefault()
     if(formData.imageUrls < 1) return setError('Debes subir al menos una imagen')
-    
-    if(+formData.regularPrice < +formData.discountPrice) return (setError('El precio descontado debe ser menor al regular'))
-    api.createListing({...formData, userRef: user?.result?._id})
-    navegar(`/publicacion/${user?.result?._id}`)
+      if(+formData.regularPrice < +formData.discountPrice) return (setError('El precio descontado debe ser menor al regular'))
+    try{
+      const { data } = await api.createListing({...formData, userRef: user?.result?._id})
+      navegar(`/publicacion/${data._id}`)
+    }catch(error){
+      console.log(error)
+    }
   }
 
   return(
