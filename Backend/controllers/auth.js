@@ -25,7 +25,9 @@ export const signup = async(req, res,next) =>{
         const token = jwt.sign({ email: newUser.email, id: newUser._id }, process.env.KEY_TOKEN)
 
         const { password: pass, ...rest } = newUser._doc
-        res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
+        const expiresDate = new Date(); // Crea una nueva fecha
+        expiresDate.setDate(expiresDate.getDate() + 7); // Establece la fecha de vencimiento
+        res.status(200).cookie('access_token', token, { httpOnly: true, expires: expiresDate }).json({ result: rest })
     }
     catch(error){
         next(error)
@@ -51,7 +53,9 @@ export const signin = async(req, res, next) =>{
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.KEY_TOKEN);
 
         const { password: pass, ...rest } = existingUser._doc;
-        res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
+        const expiresDate = new Date(); // Crea una nueva fecha
+        expiresDate.setDate(expiresDate.getDate() + 7); // Establece la fecha de vencimiento
+        res.status(200).cookie('access_token', token, { httpOnly: true, expires: expiresDate }).json({ result: rest })
 
     } catch (error) {
         res.status(500).json({ message: 'Algo salió mal' });
@@ -75,7 +79,9 @@ export const google = async (req, res, next) => {
         if(user){
             const token = jwt.sign({ id: user._id}, process.env.KEY_TOKEN)
             const { password: pass, ...rest } = user._doc;
-            res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
+            const expiresDate = new Date(); // Crea una nueva fecha
+            expiresDate.setDate(expiresDate.getDate() + 7); // Establece la fecha de vencimiento
+            res.status(200).cookie('access_token', token, { httpOnly: true, expires: expiresDate }).json({ result: rest })
         }else{
             const generatePassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8)
             const hashPassword = await bcrypt.hash(generatePassword, 10);
@@ -88,7 +94,9 @@ export const google = async (req, res, next) => {
             await newUser.save()
             const token = jwt.sign({ id: newUser._id}, process.env.KEY_TOKEN)
             const { password: pass, ...rest } = newUser._doc;
-            res.status(200).cookie('access_token', token, { httpOnly: true }).json({ result: rest })
+            const expiresDate = new Date(); // Crea una nueva fecha
+            expiresDate.setDate(expiresDate.getDate() + 7); // Establece la fecha de vencimiento
+            res.status(200).cookie('access_token', token, { httpOnly: true, expires: expiresDate }).json({ result: rest })
         }
     }catch(error){
         next(error)

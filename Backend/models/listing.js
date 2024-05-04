@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+const {Schema} = mongoose
 const listingSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -57,7 +57,6 @@ const listingSchema = new mongoose.Schema({
         type: String,
         required:true,
     },
-
 }, {timestamps: true})
 
 const Listing = mongoose.model('Listing', listingSchema)
