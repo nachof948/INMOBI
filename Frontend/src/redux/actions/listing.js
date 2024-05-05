@@ -41,3 +41,13 @@ export const listUpdate = (id, formData) => async (dispatch) =>{
 }
 
 
+export const searchGet = (searchQuery) => async (dispatch) =>{
+    try {
+        const { data } = await api.getSearch(searchQuery)
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+

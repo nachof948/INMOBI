@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from 'react-redux'
+import { searchGet } from "../redux/actions/listing"
 
 
 const Search = () => {
+  const dispatch = useDispatch()
   const navegar = useNavigate()
   const [sideBarData, setSideBarData] = useState({
     search:'',
@@ -13,7 +16,7 @@ const Search = () => {
     sort:'created_at',
     order:'desc',
   })
-  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) =>{
     if( e.target.name === 'all' || 
         e.target.name === 'rent' || 
@@ -64,7 +67,8 @@ const Search = () => {
     urlParams.set('sort', sideBarData.sort)
     urlParams.set('order', sideBarData.order)
     const searchQuery = urlParams.toString()
-    navegar(`/search?${searchQuery}`)
+    navegar(`/search?${searchQuery}`) 
+    dispatch(searchGet(searchQuery))
   }
   
   useEffect(() => {

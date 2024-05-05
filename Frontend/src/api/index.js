@@ -50,3 +50,8 @@ export const opinionList = (value,id) => API.post(`listing/comment/${id}`,{value
 export const deleteOpinionList = (commentText, id) => API.delete(`listing/comment/delete/${id}`,{commentText},{
     withCredentials: 'include'
 });
+
+//SEARCH
+export const getSearch = (searchQuery) => API.get(`/listing/search?${searchQuery}`, {
+    withCredentials: 'include'
+})

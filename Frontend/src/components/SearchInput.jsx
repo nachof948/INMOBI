@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { searchGet } from '../redux/actions/listing';
 
 const SearchInput = () => {
 	const [search, setSearch] = useState('');
   const navegar = useNavigate()
+  const dispatch = useDispatch()
   
 	const handleSubmit = (e) =>{
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
 		urlParams.set('search', search);
 		const searchQuery = urlParams.toString();
+    dispatch(searchGet(searchQuery))
 		navegar(`/search?${searchQuery}`);
   }
   
