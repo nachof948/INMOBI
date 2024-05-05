@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { searchGet } from "../redux/actions/listing"
+import { ListItem } from "../components/ListItem"
 
 
 const Search = () => {
   const dispatch = useDispatch()
   const navegar = useNavigate()
+  const {listing} = useSelector((state) => state.listing)
   const [sideBarData, setSideBarData] = useState({
     search:'',
     type:'all',
@@ -20,7 +22,7 @@ const Search = () => {
   const handleChange = (e) =>{
     if( e.target.name === 'all' || 
         e.target.name === 'rent' || 
-        e.target.name === 'sell'){
+        e.target.name === 'sale'){
         setSideBarData({
           ...sideBarData,
           type: e.target.name
@@ -70,7 +72,6 @@ const Search = () => {
     navegar(`/search?${searchQuery}`) 
     dispatch(searchGet(searchQuery))
   }
-  
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)
     const searchTerm = urlParams.get('search')
@@ -96,10 +97,11 @@ const Search = () => {
     }
 
   },[location.search])
+  
 
   return(
     <section className="flex flex-col md:flex-row">
-      <div className="p-7 md:min-h-screen border-b-2 border-b-slate-700  md:border-r-2 border-r-slate-600 ">
+      <div className="p-7 md:min-h-screen border-b-2 border-b-slate-700 w-[30%] md:border-r-2 border-r-slate-600 ">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">Busqueda:</label>
@@ -137,9 +139,9 @@ const Search = () => {
             <div className=" flex items-center gap-2 font-semibold">
               <input 
                 type="checkbox" 
-                name="sell" 
+                name="sale" 
                 className="w-4 h-4" 
-                checked={sideBarData.type === 'sell'}
+                checked={sideBarData.type === 'sale'}
                 onChange={handleChange}
                 />
               <span>Comprar</span>
@@ -194,8 +196,14 @@ const Search = () => {
           <button className="bg-slate-700 p-3 text-white uppercase rounded-lg hover:opacity-90">Buscar</button>
         </form>
       </div>
-      <div className="">
+      <div className="w-[70%]">
         <h1 className="text-3xl font-semibold border border-b-slate-900 p-3 mt-5 text-slate-700 ">Propiedades:</h1>
+        <div className="flex flex-wrap gap-10 p-3 justify-center overflow-y-auto">
+          {listing.length === 0 && <p className="text-3xl font-semibold text-red-700">No se encontraron esas propiedades!</p>}
+          {listing.map((list) =>(
+            <ListItem key={list._id} list={list}/>
+          ))}
+        </div>
       </div>
     </section>
   )

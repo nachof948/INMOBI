@@ -93,7 +93,6 @@ const CreateListing = () => {
             placeholder="Nombre" 
             className="border p-3 rounded-lg" 
             maxLength={'62'} 
-            minLength={'10'} 
             required 
             onChange={handleChange}
             value={formData.name}
@@ -102,7 +101,7 @@ const CreateListing = () => {
             type="text" 
             name="description" 
             placeholder="Descripcion" 
-            className="border p-3 rounded-lg resize-none" 
+            className="border px-3 py-2 rounded-lg resize-none h-64" 
             required 
             onChange={handleChange}
             value={formData.description}

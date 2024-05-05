@@ -1,4 +1,4 @@
-import { CLEAR_LISTING, DELETE_LISTING, END_LOADING, GET_LIST, GET_USER_LISTING, START_LOADING, UPDATE_LIST} from "../../constants";
+import { CLEAR_LISTING, DELETE_LISTING, END_LOADING, GET_LIST, GET_USER_LISTING, SEARCH_LISTING, START_LOADING, UPDATE_LIST} from "../../constants";
 import * as api from '../../api/index'
 
 export const listingUserGet = (id) => async (dispatch) =>{
@@ -44,7 +44,7 @@ export const listUpdate = (id, formData) => async (dispatch) =>{
 export const searchGet = (searchQuery) => async (dispatch) =>{
     try {
         const { data } = await api.getSearch(searchQuery)
-        console.log(data)
+        dispatch({type: SEARCH_LISTING, payload: data})
     } catch (error) {
         console.log(error)
     }
