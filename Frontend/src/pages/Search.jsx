@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { searchGet } from "../redux/actions/listing"
+import { searchGet, searchMoreGet } from "../redux/actions/listing"
 import { ListItem } from "../components/ListItem"
 
 
 const Search = () => {
   const dispatch = useDispatch()
   const navegar = useNavigate()
-  const {listing} = useSelector((state) => state.listing)
+  const {listing, showMore} = useSelector((state) => state.listing)
+
   const [sideBarData, setSideBarData] = useState({
     search:'',
     type:'all',
@@ -95,9 +96,16 @@ const Search = () => {
         order: orderTerm || 'desc',
       })
     }
-
   },[location.search])
   
+  const onShowMoreClick = () =>{
+    const numberOfListings = listing.length;
+    const startIndex = numberOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('startIndex', startIndex);
+    const searchQuery = urlParams.toString();
+    dispatch(searchMoreGet(searchQuery))
+  }
 
   return(
     <section className="flex flex-col md:flex-row">
@@ -203,8 +211,16 @@ const Search = () => {
           {listing.map((list) =>(
             <ListItem key={list._id} list={list}/>
           ))}
+          {showMore && 
+          <button 
+            className="text-green-700 text-lg mb-3 hover:underline"
+            onClick={() => onShowMoreClick()}
+            >
+              Mostrar mas propiedades
+            </button>}
         </div>
-      </div>
+        
+    </div>
     </section>
   )
 }
