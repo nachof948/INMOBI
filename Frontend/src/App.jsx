@@ -26,7 +26,7 @@ const App = () => {
           <Route path='/profile' element={<Profile />}/>
           <Route path='/crear-publicacion' element={<CreateListing />} />
           <Route path='/editar-publicacion/:id' element={<UpdateListing />} />
-        </Route>
+        </Route> 
       </Routes>
     </BrowserRouter>
   )

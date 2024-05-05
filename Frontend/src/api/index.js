@@ -4,6 +4,7 @@ import axios from 'axios'
 const API = axios.create({baseURL:'http://localhost:4500/'})
 
 
+
 //AUTH
 export const signUp = (formData) => API.post('/auth/signup', formData, {
     withCredentials: 'include'
