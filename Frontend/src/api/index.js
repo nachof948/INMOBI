@@ -55,3 +55,6 @@ export const deleteOpinionList = (commentText, id) => API.delete(`listing/commen
 export const getSearch = (searchQuery) => API.get(`/listing/search?${searchQuery}`, {
     withCredentials: 'include'
 })
+export const getOfferSearch = () => API.get(`/listing/search?offer=true&limit=4`)
+export const getRentSearch = () => API.get(`/listing/search?type=rent&limit=4`)
+export const getSaleSearch = () => API.get(`/listing/search?type=sale&limit=4`)

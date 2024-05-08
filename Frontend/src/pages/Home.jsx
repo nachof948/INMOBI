@@ -1,14 +1,15 @@
-import { useSelector } from "react-redux"
-
-
+import { Hero } from "../components/Hero"
+import { ListsHome } from "../components/ListsHome"
+import { SlideHome } from "../components/SlideHome"
 
 
 const Home = () => {
-  const {user} = useSelector((state) => state.auth)
   return(
-    <div>
-      {user?.result ? <img src={user.result.imageProfile} alt="" /> : <p>No estoy logueado</p>}
-    </div>
+    <main>
+      <Hero />
+      <SlideHome/>
+      <ListsHome />
+    </main>
   )
 }
 
